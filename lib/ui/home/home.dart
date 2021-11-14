@@ -11,7 +11,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          controller.addNote();
+          Get.toNamed("/add");
           // Get.snackbar("+", "Add Note");
         },
         child: Icon(Icons.add),
@@ -21,7 +21,7 @@ class HomeScreen extends StatelessWidget {
       body: Obx(() => ListView.builder(
           itemCount: controller.notes.length,
           itemBuilder: (ctx, idx) {
-            return _noteRow();
+            return _noteRow(context, idx);
           })),
     );
   }
@@ -51,7 +51,7 @@ class HomeScreen extends StatelessWidget {
         ),
         IconButton(
             onPressed: () {},
-            icon: Icon(
+            icon: const Icon(
               Icons.more_vert,
               color: Colors.black,
             )),
@@ -59,13 +59,30 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  _noteRow() {
+  _noteRow(context, idx) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ListTile(
         trailing: IconButton(
           onPressed: () {
-            Get.defaultDialog(title: "Are you sure want to delete?");
+            Get.defaultDialog(
+                title: "Are you sure want to delete?",
+                content: Text(
+                  controller.notes[idx].title.toString(),
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                confirm: ElevatedButton(
+                  onPressed: () {
+                    controller.removeNote(index: idx);
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text("OK"),
+                ),
+                cancel: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text("CANCLE")));
           },
           icon: const Icon(Icons.delete_forever),
         ),
@@ -74,16 +91,18 @@ class HomeScreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(15),
         ),
         isThreeLine: true,
-        title: const Text(
-          "slotted angeld bars",
+        title: Text(
+          controller.notes[idx].title.toString(),
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            Text("၂ပေခွဲ ၄ပေချောင်း"),
+          children: [
             Text(
-              'Wed 10:04 PM',
+              controller.notes[idx].note.toString(),
+            ),
+            Text(
+              controller.notes[idx].createAt.toString(),
               style: TextStyle(fontSize: 12),
             ),
           ],

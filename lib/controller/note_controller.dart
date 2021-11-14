@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:note/model/note.dart';
@@ -18,7 +20,13 @@ class NoteController extends GetxController {
     Note note = Note(
       title: titleTextController.text,
       note: noteTextController.text,
+      createAt: DateTime.now().toIso8601String(),
     );
+    log("called add note");
     notes.add(note);
+  }
+
+  removeNote({required int index}) {
+    notes.removeAt(index);
   }
 }

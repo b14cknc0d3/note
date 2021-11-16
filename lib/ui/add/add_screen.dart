@@ -13,6 +13,8 @@ class AddScreen extends StatelessWidget {
         child: const Icon(Icons.save),
         onPressed: () {
           controller.addNote();
+          controller.clear();
+          // same Get.back();  = Navigator.of(context).pop();
           Get.back();
         },
       ),
@@ -35,6 +37,7 @@ class AddScreen extends StatelessWidget {
               child: TextFormField(
                 controller: controller.titleTextController,
                 decoration: const InputDecoration(
+                  labelText: "Title",
                   contentPadding: EdgeInsets.only(left: 8.0),
                   border: InputBorder.none,
                 ),
@@ -54,9 +57,9 @@ class AddScreen extends StatelessWidget {
                 child: TextFormField(
                   controller: controller.noteTextController,
                   decoration: const InputDecoration(
-                    contentPadding: EdgeInsets.only(left: 8.0),
-                    border: InputBorder.none,
-                  ),
+                      contentPadding: EdgeInsets.only(left: 8.0),
+                      border: InputBorder.none,
+                      hintText: "Write Your Note"),
                 ),
               ),
             ),

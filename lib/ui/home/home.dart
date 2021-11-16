@@ -66,6 +66,7 @@ class HomeScreen extends StatelessWidget {
         trailing: IconButton(
           onPressed: () {
             Get.defaultDialog(
+                barrierDismissible: false,
                 title: "Are you sure want to delete?",
                 content: Text(
                   controller.notes[idx].title.toString(),
@@ -74,15 +75,15 @@ class HomeScreen extends StatelessWidget {
                 confirm: ElevatedButton(
                   onPressed: () {
                     controller.removeNote(index: idx);
-                    Navigator.of(context).pop();
+                    Get.back();
                   },
                   child: const Text("OK"),
                 ),
                 cancel: ElevatedButton(
                     onPressed: () {
-                      Navigator.of(context).pop();
+                      Get.back();
                     },
-                    child: const Text("CANCLE")));
+                    child: const Text("cancel")));
           },
           icon: const Icon(Icons.delete_forever),
         ),

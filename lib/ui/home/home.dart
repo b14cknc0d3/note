@@ -70,11 +70,13 @@ class HomeScreen extends StatelessWidget {
                 title: "Are you sure want to delete?",
                 content: Text(
                   controller.notes[idx].title.toString(),
-                  style: const TextStyle(fontWeight: FontWeight.bold),
+
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 confirm: ElevatedButton(
                   onPressed: () {
-                    controller.deleteNoteById(idx);
+                    controller.removeNote(index: idx);
+
                     Get.back();
                   },
                   child: const Text("OK"),
@@ -94,7 +96,9 @@ class HomeScreen extends StatelessWidget {
         isThreeLine: true,
         title: Text(
           controller.notes[idx].title.toString(),
+
           style: const TextStyle(fontWeight: FontWeight.bold),
+
         ),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -104,7 +108,10 @@ class HomeScreen extends StatelessWidget {
             ),
             Text(
               controller.notes[idx].createAt.toString(),
+
               style: const TextStyle(fontSize: 12),
+
+
             ),
           ],
         ),

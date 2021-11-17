@@ -10,6 +10,7 @@ class NoteController extends GetxController {
   final TextEditingController titleTextController = TextEditingController();
   final TextEditingController noteTextController = TextEditingController();
   final _db = DatabaseHelper.instance;
+
   @override
   onClose() {
     titleTextController.dispose();
@@ -53,5 +54,6 @@ class NoteController extends GetxController {
     } catch (e) {
       throw Exception(e);
     }
+
   }
 }

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:note/controller/binding.dart';
 import 'package:note/ui/add/add_screen.dart';

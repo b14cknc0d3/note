@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
           Get.toNamed("/add");
           // Get.snackbar("+", "Add Note");
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
       backgroundColor: Colors.white.withOpacity(0.9),
       appBar: _myAppBar(context),
@@ -70,11 +70,13 @@ class HomeScreen extends StatelessWidget {
                 title: "Are you sure want to delete?",
                 content: Text(
                   controller.notes[idx].title.toString(),
+
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 confirm: ElevatedButton(
                   onPressed: () {
                     controller.removeNote(index: idx);
+
                     Get.back();
                   },
                   child: const Text("OK"),
@@ -94,7 +96,9 @@ class HomeScreen extends StatelessWidget {
         isThreeLine: true,
         title: Text(
           controller.notes[idx].title.toString(),
-          style: TextStyle(fontWeight: FontWeight.bold),
+
+          style: const TextStyle(fontWeight: FontWeight.bold),
+
         ),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -104,7 +108,10 @@ class HomeScreen extends StatelessWidget {
             ),
             Text(
               controller.notes[idx].createAt.toString(),
-              style: TextStyle(fontSize: 12),
+
+              style: const TextStyle(fontSize: 12),
+
+
             ),
           ],
         ),

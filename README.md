@@ -15,3 +15,9 @@ For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 # note
+
+#Find database location 
+use comment => adb shell
+
+#Pull database file
+use comment => adb pull *Log* (eg..  adb pull */storage/self/primary/Documents/note.db* note.db)

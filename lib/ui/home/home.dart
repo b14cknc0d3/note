@@ -11,17 +11,17 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          controller.addNote();
+          Get.toNamed("/add");
           // Get.snackbar("+", "Add Note");
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
       backgroundColor: Colors.white.withOpacity(0.9),
       appBar: _myAppBar(context),
       body: Obx(() => ListView.builder(
           itemCount: controller.notes.length,
           itemBuilder: (ctx, idx) {
-            return _noteRow();
+            return _noteRow(context, idx);
           })),
     );
   }
@@ -51,7 +51,7 @@ class HomeScreen extends StatelessWidget {
         ),
         IconButton(
             onPressed: () {},
-            icon: Icon(
+            icon: const Icon(
               Icons.more_vert,
               color: Colors.black,
             )),
@@ -59,13 +59,31 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  _noteRow() {
+  _noteRow(context, idx) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ListTile(
         trailing: IconButton(
           onPressed: () {
-            Get.defaultDialog(title: "Are you sure want to delete?");
+            Get.defaultDialog(
+                barrierDismissible: false,
+                title: "Are you sure want to delete?",
+                content: Text(
+                  controller.notes[idx].title.toString(),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+                confirm: ElevatedButton(
+                  onPressed: () {
+                    controller.deleteNoteById(idx);
+                    Get.back();
+                  },
+                  child: const Text("OK"),
+                ),
+                cancel: ElevatedButton(
+                    onPressed: () {
+                      Get.back();
+                    },
+                    child: const Text("cancel")));
           },
           icon: const Icon(Icons.delete_forever),
         ),
@@ -74,17 +92,19 @@ class HomeScreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(15),
         ),
         isThreeLine: true,
-        title: const Text(
-          "slotted angeld bars",
-          style: TextStyle(fontWeight: FontWeight.bold),
+        title: Text(
+          controller.notes[idx].title.toString(),
+          style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            Text("၂ပေခွဲ ၄ပေချောင်း"),
+          children: [
             Text(
-              'Wed 10:04 PM',
-              style: TextStyle(fontSize: 12),
+              controller.notes[idx].note.toString(),
+            ),
+            Text(
+              controller.notes[idx].createAt.toString(),
+              style: const TextStyle(fontSize: 12),
             ),
           ],
         ),

@@ -10,8 +10,6 @@ class NoteController extends GetxController {
   final TextEditingController titleTextController = TextEditingController();
   final TextEditingController noteTextController = TextEditingController();
   final _db = DatabaseHelper.instance;
-  //  final FocusNode titlefn = FocusNode();
-  //  final FocusNode notefn = FocusNode();
 
   @override
   onClose() {
@@ -47,7 +45,15 @@ class NoteController extends GetxController {
     noteTextController.clear();
   }
 
-  removeNote({required int index}) {
-    notes.removeAt(index);
+  deleteNoteById(int index) async {
+    try {
+      final int row = await _db.delete(index);
+      if (row > 0) {
+        getAllNote();
+      }
+    } catch (e) {
+      throw Exception(e);
+    }
+
   }
 }

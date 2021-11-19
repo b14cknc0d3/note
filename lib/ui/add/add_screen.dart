@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:note/controller/note_controller.dart';
+import 'package:note/model/note.dart';
+import 'package:note/ui/my_drawer/my_drawer.dart';
+import 'package:search_page/search_page.dart';
 
 class AddScreen extends StatelessWidget {
   AddScreen({Key? key}) : super(key: key);
@@ -44,6 +47,7 @@ class AddScreen extends StatelessWidget {
               ),
             ),
           ),
+
           // Divider(),
           Expanded(
             child: Padding(

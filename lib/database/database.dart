@@ -1,4 +1,3 @@
-
 import 'dart:developer';
 import 'dart:io';
 import 'package:note/model/note.dart';
@@ -7,7 +6,6 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
 
 class DatabaseHelper {
-
   static const _databaseName = "note.db";
   static const _databaseVersion = 1;
   static const table = 'Notedb';
@@ -33,7 +31,7 @@ class DatabaseHelper {
   _initDatabase() async {
     String dbPath = await getDatabasesPath();
     String dataPath = p.join(dbPath, _databaseName);
-    
+
     log(dataPath);
 
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
@@ -72,6 +70,7 @@ class DatabaseHelper {
   Future<List<Note>> queryAllRows() async {
     Database db = await instance.database;
     final data = await db.query(table);
+    log(data.toString());
     final List<Note> noteList =
         data.map<Note>((e) => Note.fromJson(e)).toList();
     return noteList;
@@ -81,7 +80,6 @@ class DatabaseHelper {
   //   Database db = await instance.database;
   //   return await db.rawQuery('SELECT  * FROM ApiMan ORDER  BY "tabId" ASC ');
   // }
-
 
 //TODO :ADD WORKSPACE support [AND workspace = "$input"]
   // Future<List<Map<String, dynamic>>> queryAllApiRowOrderByTabId() async {

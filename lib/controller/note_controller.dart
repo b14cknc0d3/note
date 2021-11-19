@@ -11,6 +11,8 @@ class NoteController extends GetxController {
   final TextEditingController noteTextController = TextEditingController();
   final _db = DatabaseHelper.instance;
 
+  RxList<Note> searchNote = <Note>[].obs;
+
   @override
   onClose() {
     titleTextController.dispose();
@@ -45,6 +47,11 @@ class NoteController extends GetxController {
     noteTextController.clear();
   }
 
+  searchNoteByTitle() {
+    searchNote.value = notes.reversed.toList();
+    log(searchNote.toString());
+  }
+
   deleteNoteById(int index) async {
     try {
       final int row = await _db.delete(index);
@@ -54,6 +61,5 @@ class NoteController extends GetxController {
     } catch (e) {
       throw Exception(e);
     }
-
   }
 }

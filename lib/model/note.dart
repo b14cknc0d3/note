@@ -7,7 +7,7 @@ class Note {
   Note({this.id, this.title, this.note, this.createAt});
 
   Note.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+    id = json['_id'];
     title = json['title'];
     note = json['note'];
     createAt = json['createAt'];
@@ -21,5 +21,10 @@ class Note {
     data['note'] = note;
     data['createAt'] = createAt;
     return data;
+  }
+
+  @override
+  String toString() {
+    return title.toString();
   }
 }

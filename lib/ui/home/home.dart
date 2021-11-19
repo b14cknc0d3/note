@@ -28,6 +28,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Get.toNamed("/add");
@@ -49,13 +50,14 @@ class HomeScreen extends StatelessWidget {
     return AppBar(
       elevation: 0.5,
       backgroundColor: Colors.white.withOpacity(0.9),
-      leading: IconButton(
-        icon: const Icon(
-          Icons.menu,
-          color: Colors.black,
-        ),
-        onPressed: () {},
-      ),
+      iconTheme: IconThemeData(color: Colors.red),
+      // leading: IconButton(
+      //   icon: const Icon(
+      //     Icons.menu,
+      //     color: Colors.black,
+      //   ),
+      //   onPressed: () {},
+      // ),
       title: const Text(
         'All notes',
         style: TextStyle(color: Colors.black),

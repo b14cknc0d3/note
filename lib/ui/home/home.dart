@@ -28,7 +28,9 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(),
+      drawer: Drawer(
+        child: MyHeaderDrawer(),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Get.toNamed("/add");

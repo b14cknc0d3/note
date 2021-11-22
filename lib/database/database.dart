@@ -110,6 +110,12 @@ class DatabaseHelper {
     return await db.update(table, row, where: '$columnId = ?', whereArgs: [id]);
   }
 
+  Future<Map<String, Object?>> selectRowById(int id) async {
+    Database db = await instance.database;
+    var result = await db.query(table, where: '$columnId = ?', whereArgs: [id]);
+    return result[id];
+  }
+
   Future deleleAll() async {
     Database db = await instance.database;
     return await db.delete(table);

@@ -3,6 +3,9 @@ class Note {
   String? title;
   String? note;
   String? createAt;
+  String? updatedAt; //for Frequently used in Drawer
+  String? folderName; //for Folder in Drawer
+  bool? isInTrash; //for Recycle bin in Drawer
 
   Note({this.id, this.title, this.note, this.createAt});
 

@@ -52,6 +52,11 @@ class NoteController extends GetxController {
     log(searchNote.toString());
   }
 
+  selectRowById(int index) async{
+    final Map<String, Object?> row = await  _db.selectRowById(index);
+    
+      }
+
   deleteNoteById(int index) async {
     try {
       final int row = await _db.delete(index);

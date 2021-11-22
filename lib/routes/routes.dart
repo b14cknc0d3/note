@@ -12,7 +12,7 @@ class MyRoutes {
     GetPage(name: '/', page: () => const SplashScreen()),
     GetPage(name: '/home', page: () => HomeScreen(), binding: NoteBinding()),
     GetPage(name: '/add', page: () => AddScreen(), binding: NoteBinding()),
-        GetPage(name: '/edit', page: () => EditScreen(), binding: NoteBinding()),
+    GetPage(name: '/edit', page: () => EditScreen(), binding: NoteBinding()),
 
     // GetPage(
     //     name: '/my_drawer',

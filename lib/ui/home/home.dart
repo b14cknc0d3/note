@@ -52,7 +52,7 @@ class HomeScreen extends StatelessWidget {
     return AppBar(
       elevation: 0.5,
       backgroundColor: Colors.white.withOpacity(0.9),
-      iconTheme: const IconThemeData(color: Colors.red),
+      iconTheme: IconThemeData(color: Colors.red),
       // leading: IconButton(
       //   icon: const Icon(
       //     Icons.menu,
@@ -82,10 +82,10 @@ class HomeScreen extends StatelessWidget {
                       onQueryUpdate: (s) => log(s),
                       items: controller.notes,
                       searchLabel: 'Search',
-                      suggestion: const Center(
+                      suggestion: Center(
                         child: Text('No recent searches'),
                       ),
-                      failure: const Center(
+                      failure: Center(
                         child: Text('No results found :('),
                       ),
                       filter: (note) => [note.title, note.note, note.createAt],
@@ -111,58 +111,30 @@ class HomeScreen extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ListTile(
-        trailing: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.yellow,
-                  shape: RoundedRectangleBorder(
-                
-                    borderRadius: BorderRadius.circular(15)
-                  )
-                   //fixedSize: Size(18, 18)
+        trailing: IconButton(
+          onPressed: () {
+            Get.defaultDialog(
+                barrierDismissible: false,
+                title: "Are you sure want to delete?",
+                content: Text(
+                  controller.notes[idx].title.toString(),
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                onPressed: (){
-                  Get.toNamed('/edit');
-                  controller.selectRowById(idx);
-                }, child: const Icon(Icons.edit)),
-            ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15)
-                  )
-                   //fixedSize: Size(18, 18)
-                ),
-              onPressed: () {
-                Get.defaultDialog(
-                    barrierDismissible: false,
-                    title: "Are you sure want to delete?",
-                    content: Text(
-                      controller.notes[idx].title.toString(),
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    confirm: ElevatedButton(
-                      onPressed: () {
-                        controller.deleteNoteById(controller.notes[idx].id!);
+                confirm: ElevatedButton(
+                  onPressed: () {
+                    controller.deleteNoteById(controller.notes[idx].id!);
 
-                        Get.back();
-                      },
-                      child: const Text("OK"),
-                    ),
-                    cancel: ElevatedButton(
-                        onPressed: () {
-                          Get.back();
-                        },
-                        child: const Text("cancel")));
-              },
-              child: const Icon(Icons.delete_forever),
-            ),
-          ],
+                    Get.back();
+                  },
+                  child: const Text("OK"),
+                ),
+                cancel: ElevatedButton(
+                    onPressed: () {
+                      Get.back();
+                    },
+                    child: const Text("cancel")));
+          },
+          icon: const Icon(Icons.delete_forever),
         ),
         tileColor: Colors.white,
         shape: RoundedRectangleBorder(

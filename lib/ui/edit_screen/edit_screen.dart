@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:note/controller/note_controller.dart';
+//import 'package:note/database/database.dart';
 
 class EditScreen extends StatelessWidget {
   EditScreen({Key? key}) : super(key: key);
   final NoteController controller = Get.find();
+  //var obj = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +37,7 @@ class EditScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(0)),
               height: 50,
               child: TextFormField(
-                controller: controller.titleTextController,
-                //initialValue: controller.selectRowById(),
-
+                controller: TextEditingController(text: 'd'),
                 decoration: const InputDecoration(
                   labelText: "Title",
                   contentPadding: EdgeInsets.only(left: 8.0),
@@ -58,7 +58,7 @@ class EditScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(0)),
                 height: 50,
                 child: TextFormField(
-                  controller: controller.noteTextController,
+                  controller: TextEditingController(text: 'Edit note ....'),
                   decoration: const InputDecoration(
                       contentPadding: EdgeInsets.only(left: 8.0),
                       border: InputBorder.none,

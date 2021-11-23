@@ -127,8 +127,8 @@ class HomeScreen extends StatelessWidget {
                    //fixedSize: Size(18, 18)
                 ),
                 onPressed: (){
-                  Get.toNamed('/edit');
-                  controller.selectRowById(idx);
+                  Get.toNamed('/edit', arguments: [controller.selectRowById(idx)]);
+                  //controller.selectRowById(idx);
                 }, child: const Icon(Icons.edit)),
             ),
             ElevatedButton(

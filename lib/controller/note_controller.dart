@@ -54,8 +54,15 @@ class NoteController extends GetxController {
 
   selectRowById(int index) async{
     final Map<String, Object?> row = await  _db.selectRowById(index);
-    
+    log(row.toString());
+    var note = Note.fromJson(row);
+    titleTextController.text = note.title.toString();
+    noteTextController.text = note.note.toString();
       }
+  
+  updateNote(){
+
+  }
 
   deleteNoteById(int index) async {
     try {

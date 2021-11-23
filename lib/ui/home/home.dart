@@ -111,6 +111,7 @@ class HomeScreen extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ListTile(
+<<<<<<< HEAD
         trailing: IconButton(
           onPressed: () {
             Get.defaultDialog(
@@ -135,6 +136,43 @@ class HomeScreen extends StatelessWidget {
                     child: const Text("cancel")));
           },
           icon: const Icon(Icons.delete_forever),
+=======
+        trailing: Row(
+          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            IconButton(
+                onPressed: () {
+                  Get.toNamed('/edit', arguments: idx + 1);
+                },
+                icon: const Icon(Icons.edit, color: Colors.indigo)),
+            IconButton(
+              onPressed: () {
+                Get.defaultDialog(
+                    barrierDismissible: false,
+                    title: "Are you sure want to delete?",
+                    content: Text(
+                      controller.notes[idx].title.toString(),
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    confirm: ElevatedButton(
+                      onPressed: () {
+                        controller.deleteNoteById(controller.notes[idx].id!);
+
+                        Get.back();
+                      },
+                      child: const Text("OK"),
+                    ),
+                    cancel: ElevatedButton(
+                        onPressed: () {
+                          Get.back();
+                        },
+                        child: const Text("cancel")));
+              },
+              icon: const Icon(Icons.delete_forever, color: Colors.red),
+            ),
+          ],
+>>>>>>> 2ad0806287f37d5eaf5ee685f4f5944f3beff816
         ),
         tileColor: Colors.white,
         shape: RoundedRectangleBorder(

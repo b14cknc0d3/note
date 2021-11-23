@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
+//import 'dart:math';
 import 'package:note/model/note.dart';
 import 'package:path/path.dart' as p;
 import 'package:sqflite/sqflite.dart';
@@ -104,16 +105,21 @@ class DatabaseHelper {
 
   // We are assuming here that the id column in the map is set. The other
   // column values will be used to update the row.
-  Future<int> update(Map<String, dynamic> row) async {
+  Future<int> update(Map<String, dynamic> row, int id) async {
     Database db = await instance.database;
-    int id = row[columnId];
+
     return await db.update(table, row, where: '$columnId = ?', whereArgs: [id]);
   }
 
   Future<Map<String, Object?>> selectRowById(int id) async {
     Database db = await instance.database;
     var result = await db.query(table, where: '$columnId = ?', whereArgs: [id]);
-    return result[id];
+    log(result.toString());
+    if (result.isNotEmpty) {
+      return result[0];
+    } else {
+      throw Exception("Empty Result");
+    }
   }
 
   Future deleleAll() async {

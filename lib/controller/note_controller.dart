@@ -52,10 +52,26 @@ class NoteController extends GetxController {
     log(searchNote.toString());
   }
 
-  selectRowById(int index) async{
-    final Map<String, Object?> row = await  _db.selectRowById(index);
-    
-      }
+  selectRowById(int index) async {
+    final Map<String, Object?> row = await _db.selectRowById(index);
+    log("Edit Note " + row.toString());
+    var note = Note.fromJson(row);
+    titleTextController.text = note.title.toString();
+    noteTextController.text = note.note.toString();
+  }
+
+  updateNoteById(int idx) async {
+    Note note = Note(
+      title: titleTextController.text,
+      note: noteTextController.text,
+      createAt: DateTime.now().toIso8601String(),
+      //id: idx,
+    );
+    log(idx.toString());
+
+    await _db.update(note.toJson(), idx);
+    getAllNote();
+  }
 
   deleteNoteById(int index) async {
     try {

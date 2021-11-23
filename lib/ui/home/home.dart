@@ -112,32 +112,15 @@ class HomeScreen extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: ListTile(
         trailing: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.yellow,
-                  shape: RoundedRectangleBorder(
-                
-                    borderRadius: BorderRadius.circular(15)
-                  )
-                   //fixedSize: Size(18, 18)
-                ),
-                onPressed: (){
-                  Get.toNamed('/edit', arguments: [controller.selectRowById(idx)]);
-                  //controller.selectRowById(idx);
-                }, child: const Icon(Icons.edit)),
-            ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15)
-                  )
-                   //fixedSize: Size(18, 18)
-                ),
+            IconButton(
+                onPressed: () {
+                  Get.toNamed('/edit', arguments: idx + 1);
+                },
+                icon: const Icon(Icons.edit, color: Colors.indigo)),
+            IconButton(
               onPressed: () {
                 Get.defaultDialog(
                     barrierDismissible: false,
@@ -160,7 +143,7 @@ class HomeScreen extends StatelessWidget {
                         },
                         child: const Text("cancel")));
               },
-              child: const Icon(Icons.delete_forever),
+              icon: const Icon(Icons.delete_forever, color: Colors.red),
             ),
           ],
         ),

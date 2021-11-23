@@ -6,17 +6,18 @@ import 'package:note/controller/note_controller.dart';
 class EditScreen extends StatelessWidget {
   EditScreen({Key? key}) : super(key: key);
   final NoteController controller = Get.find();
-  //var obj = Get.arguments;
+  int noteId = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
+    controller.selectRowById(noteId);
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.save),
         onPressed: () {
-          controller.addNote();
+          controller.updateNoteById(noteId);
           controller.clear();
-          // same Get.back();  = Navigator.of(context).pop();
+          //  same Get.back();  = Navigator.of(context).pop();
           Get.back();
         },
       ),

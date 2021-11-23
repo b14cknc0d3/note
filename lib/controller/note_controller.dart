@@ -1,5 +1,5 @@
 import 'dart:developer';
-
+import 'package:intl/intl.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:note/database/database.dart';
@@ -30,7 +30,8 @@ class NoteController extends GetxController {
     Note note = Note(
       title: titleTextController.text,
       note: noteTextController.text,
-      createAt: DateTime.now().toIso8601String(),
+      //to format as Month and day, use intl package
+      createAt: DateFormat.MMMMd().format(DateTime.now()).toString(),
     );
     log("called add note");
     _db.insert(note.toJson());

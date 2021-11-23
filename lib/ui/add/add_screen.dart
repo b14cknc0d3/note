@@ -34,7 +34,7 @@ class AddScreen extends StatelessWidget {
             child: TextFormField(
               controller: controller.titleTextController,
               decoration: const InputDecoration(
-                labelText: "Title",
+                hintText: "Title",
                 contentPadding: EdgeInsets.only(left: 8.0),
                 border: OutlineInputBorder(),
               ),
@@ -49,7 +49,7 @@ class AddScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: Colors.white54,
                     border: Border.all(color: Colors.red),
-                    borderRadius: BorderRadius.circular(0)),
+                    borderRadius: BorderRadius.circular(8)),
                 height: 50,
                 child: TextFormField(
                   controller: controller.noteTextController,

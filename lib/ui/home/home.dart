@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:note/controller/note_controller.dart';
 import 'package:note/model/note.dart';
 import 'package:note/ui/my_drawer/my_drawer.dart';
+import 'package:note/ui/note_view/note_view.dart';
 import 'package:search_page/search_page.dart';
 
 // class Note {
@@ -33,6 +34,7 @@ class HomeScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          controller.clear();
           Get.toNamed("/add");
           // Get.snackbar("+", "Add Note");
         },
@@ -108,94 +110,87 @@ class HomeScreen extends StatelessWidget {
   }
 
   _noteRow(context, idx) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ListTile(
-<<<<<<< HEAD
-        trailing: IconButton(
-          onPressed: () {
-            Get.defaultDialog(
-                barrierDismissible: false,
-                title: "Are you sure want to delete?",
-                content: Text(
-                  controller.notes[idx].title.toString(),
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                confirm: ElevatedButton(
+    return InkWell(
+      onTap: () {
+        Get.toNamed('/noteView', arguments: idx);
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ListTile(
+          trailing: Row(
+            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              IconButton(
                   onPressed: () {
-                    controller.deleteNoteById(controller.notes[idx].id!);
-
-                    Get.back();
+                    Get.toNamed('/edit', arguments: idx + 1);
                   },
-                  child: const Text("OK"),
-                ),
-                cancel: ElevatedButton(
-                    onPressed: () {
-                      Get.back();
-                    },
-                    child: const Text("cancel")));
-          },
-          icon: const Icon(Icons.delete_forever),
-=======
-        trailing: Row(
-          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            IconButton(
+                  icon: const Icon(Icons.edit, color: Colors.indigo)),
+              IconButton(
                 onPressed: () {
-                  Get.toNamed('/edit', arguments: idx + 1);
-                },
-                icon: const Icon(Icons.edit, color: Colors.indigo)),
-            IconButton(
-              onPressed: () {
-                Get.defaultDialog(
-                    barrierDismissible: false,
-                    title: "Are you sure want to delete?",
-                    content: Text(
-                      controller.notes[idx].title.toString(),
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    confirm: ElevatedButton(
-                      onPressed: () {
-                        controller.deleteNoteById(controller.notes[idx].id!);
-
-                        Get.back();
-                      },
-                      child: const Text("OK"),
-                    ),
-                    cancel: ElevatedButton(
+                  Get.defaultDialog(
+                      barrierDismissible: false,
+                      title: "Are you sure want to delete?",
+                      content: Text(
+                        controller.notes[idx].title.toString(),
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      confirm: ElevatedButton(
                         onPressed: () {
+                          controller.deleteNoteById(controller.notes[idx].id!);
+
                           Get.back();
                         },
-                        child: const Text("cancel")));
-              },
-              icon: const Icon(Icons.delete_forever, color: Colors.red),
+                        child: const Text("OK"),
+                      ),
+                      cancel: ElevatedButton(
+                          onPressed: () {
+                            Get.back();
+                          },
+                          child: const Text("cancel")));
+                },
+                icon: const Icon(Icons.delete_forever, color: Colors.red),
+              ),
+            ],
+          ),
+          tileColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+          isThreeLine: true,
+          title: Text(
+            trimString(
+              text: controller.notes[idx].title.toString(),
             ),
-          ],
->>>>>>> 2ad0806287f37d5eaf5ee685f4f5944f3beff816
-        ),
-        tileColor: Colors.white,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
-        ),
-        isThreeLine: true,
-        title: Text(
-          controller.notes[idx].title.toString(),
-          style: const TextStyle(fontWeight: FontWeight.bold),
-        ),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              controller.notes[idx].note.toString(),
-            ),
-            Text(
-              controller.notes[idx].createAt.toString(),
-              style: const TextStyle(fontSize: 12),
-            ),
-          ],
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(trimString(
+                text: controller.notes[idx].note.toString(),
+              )),
+              Text(
+                trimString(
+                  text: controller.notes[idx].createAt.toString(),
+                ),
+                style: const TextStyle(fontSize: 12),
+              ),
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  String trimString({required String text}) {
+    if (text.length > 30) {
+      var trimText = text.substring(0, 28) + "...";
+      log(trimText);
+      return trimText;
+    } else {
+      log(text);
+      return text;
+    }
   }
 }

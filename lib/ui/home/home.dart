@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:note/controller/note_controller.dart';
@@ -64,6 +63,7 @@ class HomeScreen extends StatelessWidget {
         'All notes',
         style: TextStyle(color: Colors.black),
       ),
+
       actions: [
         Obx(
           () => IconButton(

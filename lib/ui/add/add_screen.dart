@@ -31,23 +31,12 @@ class AddScreen extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Container(
-              decoration: BoxDecoration(
-                  color: Colors.white54,
-                  border: Border.all(color: Colors.red),
-                  borderRadius: BorderRadius.circular(0)),
-              height: 50,
-              child: TextFormField(
-                controller: controller.titleTextController,
-                decoration: const InputDecoration(
-                  hintText: "Title",
-                  hintStyle: TextStyle(
-                      fontSize: 15.00,
-                      color: Colors.redAccent,
-                      fontWeight: FontWeight.w500),
-                  contentPadding: EdgeInsets.only(left: 8.0),
-                  border: InputBorder.none,
-                ),
+            child: TextFormField(
+              controller: controller.titleTextController,
+              decoration: const InputDecoration(
+                hintText: "Title",
+                contentPadding: EdgeInsets.only(left: 8.0),
+                border: OutlineInputBorder(),
               ),
             ),
           ),
@@ -60,18 +49,15 @@ class AddScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: Colors.white54,
                     border: Border.all(color: Colors.red),
-                    borderRadius: BorderRadius.circular(0)),
+                    borderRadius: BorderRadius.circular(8)),
                 height: 50,
                 child: TextFormField(
                   controller: controller.noteTextController,
                   decoration: const InputDecoration(
-                      contentPadding: EdgeInsets.only(left: 8.0),
-                      border: InputBorder.none,
-                      hintText: "Write Your Note",
-                      hintStyle: TextStyle(
-                          fontSize: 15.00,
-                          color: Colors.redAccent,
-                          fontWeight: FontWeight.w500)),
+                    contentPadding: EdgeInsets.only(left: 8.0),
+                    border: InputBorder.none,
+                    hintText: "Write Your Note",
+                  ),
                 ),
               ),
             ),

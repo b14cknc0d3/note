@@ -30,21 +30,14 @@ class EditScreen extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Container(
-              decoration: BoxDecoration(
-                  color: Colors.white54,
-                  border: Border.all(color: Colors.red),
-                  borderRadius: BorderRadius.circular(0)),
-              height: 50,
-              child: TextFormField(
-                controller: controller.titleTextController,
-                //initialValue: controller.selectRowById(),
+            child: TextFormField(
+              controller: controller.titleTextController,
+              //initialValue: controller.selectRowById(),
 
-                decoration: const InputDecoration(
-                  labelText: "Title",
-                  contentPadding: EdgeInsets.only(left: 8.0),
-                  border: InputBorder.none,
-                ),
+              decoration: const InputDecoration(
+                hintText: "Title",
+                contentPadding: EdgeInsets.only(left: 8.0),
+                border: OutlineInputBorder(),
               ),
             ),
           ),
@@ -57,10 +50,11 @@ class EditScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: Colors.white54,
                     border: Border.all(color: Colors.red),
-                    borderRadius: BorderRadius.circular(0)),
+                    borderRadius: BorderRadius.circular(4)),
                 height: 50,
                 child: TextFormField(
                   controller: controller.noteTextController,
+                  keyboardType: TextInputType.multiline,
                   decoration: const InputDecoration(
                       contentPadding: EdgeInsets.only(left: 8.0),
                       border: InputBorder.none,

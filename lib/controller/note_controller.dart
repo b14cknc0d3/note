@@ -27,10 +27,11 @@ class NoteController extends GetxController {
   }
 
   addNote() {
+    DateTime now = DateTime.now();
     Note note = Note(
       title: titleTextController.text,
       note: noteTextController.text,
-      createAt: DateTime.now().toIso8601String(),
+      createAt: "${now.year}-${now.month}-${now.day}",
     );
     log("called add note");
     _db.insert(note.toJson());

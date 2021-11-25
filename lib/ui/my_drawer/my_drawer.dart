@@ -41,7 +41,7 @@ class _MyHeaderDrawerState extends State<MyHeaderDrawer> {
               leading: Icon(Icons.turned_in),
               title: Text("Frequently used"),
               onTap: () {
-                Navigator.pushNamed(context, '/fav');
+                Navigator.of(context).pop();
               },
             ),
             ListTile(

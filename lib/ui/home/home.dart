@@ -1,5 +1,6 @@
 import 'dart:developer';
-
+//import 'dart:js';
+import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:note/controller/note_controller.dart';
@@ -66,6 +67,7 @@ class HomeScreen extends StatelessWidget {
         'All notes',
         style: TextStyle(color: Colors.black),
       ),
+
       actions: [
         Obx(
           () => IconButton(
@@ -151,6 +153,11 @@ class HomeScreen extends StatelessWidget {
                 },
                 icon: const Icon(Icons.delete_forever, color: Colors.red),
               ),
+              StarButton(
+                  isStarred: false,
+                  valueChanged: (_isStarred) {
+                    print('Is Starred : $_isStarred');
+                  })
             ],
           ),
           tileColor: Colors.white,

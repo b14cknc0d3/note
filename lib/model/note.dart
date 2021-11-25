@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class Note {
   int? id;
   String? title;
@@ -7,15 +5,28 @@ class Note {
   String? createAt;
   String? updatedAt; //for Frequently used in Drawer
   String? folderName; //for Folder in Drawer
-  bool? isInTrash; //for Recycle bin in Drawer
+  int? isInTrash; //for Recycle bin in Drawer
+  int? favourite;
 
-  Note({this.id, this.title, this.note, this.createAt});
+  Note(
+      {this.id,
+      this.title,
+      this.note,
+      this.createAt,
+      this.updatedAt,
+      this.folderName,
+      this.isInTrash,
+      this.favourite});
 
   Note.fromJson(Map<String, dynamic> json) {
     id = json['_id'];
     title = json['title'];
     note = json['note'];
     createAt = json['createAt'];
+    updatedAt = json['updatedAt'];
+    folderName = json['folderName'];
+    isInTrash = json['isInTrash'];
+    favourite = json['favourite'];
   }
 
   Map<String, dynamic> toJson() {
@@ -25,6 +36,10 @@ class Note {
     data['title'] = title;
     data['note'] = note;
     data['createAt'] = createAt;
+    data['updatedAt'] = updatedAt;
+    data['folderName'] = folderName;
+    data['isInTrash'] = isInTrash;
+    data['favourite'] = favourite;
     return data;
   }
 

@@ -54,9 +54,10 @@ class AddScreen extends StatelessWidget {
                 child: TextFormField(
                   controller: controller.noteTextController,
                   decoration: const InputDecoration(
-                      contentPadding: EdgeInsets.only(left: 8.0),
-                      border: InputBorder.none,
-                      hintText: "Write Your Note"),
+                    contentPadding: EdgeInsets.only(left: 8.0),
+                    border: InputBorder.none,
+                    hintText: "Write Your Note",
+                  ),
                 ),
               ),
             ),

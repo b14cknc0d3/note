@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:note/routes/routes.dart';
+import 'package:share/share.dart';
+import 'package:favorite_button/favorite_button.dart';
 
 void main() {
   runApp(const MyApp());

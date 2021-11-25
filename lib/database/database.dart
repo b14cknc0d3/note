@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 //import 'dart:math';
+import 'package:flutter/widgets.dart';
 import 'package:note/model/note.dart';
 import 'package:path/path.dart' as p;
 import 'package:sqflite/sqflite.dart';
@@ -14,6 +15,10 @@ class DatabaseHelper {
   static const columnTitle = 'title';
   static const columnNote = 'note';
   static const columnDate = 'createAt';
+  static const columnFavourite = 'favourite';
+  static const columnIsInTrash = 'isInTrash';
+  static const columnFolderName = 'folderName';
+  static const columnUpdatedAt = 'updatedAt';
 
   // make this a singleton class
   DatabaseHelper._privateConstructor();
@@ -51,6 +56,11 @@ class DatabaseHelper {
   , $columnTitle  TEXT
   ,$columnNote TEXT      
   ,$columnDate  VARCHAR(20)
+  , $columnUpdatedAt VARCHAR(20)
+  ,$columnFolderName VARCHAR(100) NOT NULL DEFAULT "default"
+  ,$columnIsInTrash INT NOT NULL DEFAULT 0
+  ,$columnFavourite INT NOT NULL DEFAULT 0
+
 );
           ''');
   }
@@ -74,6 +84,7 @@ class DatabaseHelper {
     log(data.toString());
     final List<Note> noteList =
         data.map<Note>((e) => Note.fromJson(e)).toList();
+    log(noteList.toString());
     return noteList;
   }
 
@@ -114,6 +125,7 @@ class DatabaseHelper {
   Future<Map<String, Object?>> selectRowById(int id) async {
     Database db = await instance.database;
     var result = await db.query(table, where: '$columnId = ?', whereArgs: [id]);
+
     log(result.toString());
     if (result.isNotEmpty) {
       return result[0];

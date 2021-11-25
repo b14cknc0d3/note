@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:share/share.dart';
 
 class MyHeaderDrawer extends StatefulWidget {
   const MyHeaderDrawer({Key? key}) : super(key: key);
@@ -32,6 +33,7 @@ class _MyHeaderDrawerState extends State<MyHeaderDrawer> {
               leading: Icon(Icons.people),
               title: Text("Share notebooks"),
               onTap: () {
+                Share.share("title");
                 Navigator.of(context).pop();
               },
             ),
@@ -39,7 +41,7 @@ class _MyHeaderDrawerState extends State<MyHeaderDrawer> {
               leading: Icon(Icons.turned_in),
               title: Text("Frequently used"),
               onTap: () {
-                Navigator.of(context).pop();
+                Navigator.pushNamed(context, '/fav');
               },
             ),
             ListTile(

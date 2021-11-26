@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:note/controller/binding.dart';
 import 'package:note/ui/add/add_screen.dart';
 import 'package:note/ui/edit_screen/edit_screen.dart';
-
 import 'package:note/ui/home/home.dart';
 import 'package:note/ui/note_view/note_view.dart';
 //import 'package:note/ui/my_drawer/my_drawer.dart';

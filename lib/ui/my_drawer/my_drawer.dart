@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:note/ui/home/home.dart';
 import 'package:share/share.dart';
 
 class MyHeaderDrawer extends StatefulWidget {

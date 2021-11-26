@@ -153,11 +153,6 @@ class HomeScreen extends StatelessWidget {
                 },
                 icon: const Icon(Icons.delete_forever, color: Colors.red),
               ),
-              StarButton(
-                  isStarred: false,
-                  valueChanged: (_isStarred) {
-                    print('Is Starred : $_isStarred');
-                  })
             ],
           ),
           tileColor: Colors.white,

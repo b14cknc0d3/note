@@ -36,6 +36,7 @@ dependencies:
   sqflite: ^2.0.0+4
   share: ^2.0.4
   favorite_button: ^0.0.4
+  markdown_io: ^0.0.1-dev.1
 favorite_button: ^0.0.4
 
 

@@ -50,7 +50,8 @@ class DatabaseHelper {
 
   // SQL code to create the database table
   Future _onCreate(Database db, int version) async {
-    await db.execute('''
+    await db.execute(
+        '''
           CREATE TABLE $table(
 	  $columnId INTEGER PRIMARY KEY
   , $columnTitle  TEXT
@@ -145,4 +146,17 @@ class DatabaseHelper {
     Database db = await instance.database;
     return await db.delete(table, where: '$columnId = ?', whereArgs: [id]);
   }
+
+  Future<void> favoriteFunction(int value, int idx) async {
+    Database db = await instance.database;
+    await db.rawUpdate(
+        'UPDATE $table SET $columnFavourite = ? where $columnId = ?',
+        [value, idx]);
+  }
+
+  // Future<void> inTrashFun(int value, int idx) async {
+  //   Database db = await instance.database;
+  //   await db.rawDelete(
+  //       'DELETE FROM $table where $columnIsInTrash = ? ', [value, idx]);
+  // }
 }

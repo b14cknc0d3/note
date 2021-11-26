@@ -21,7 +21,7 @@ class MyRoutes {
         name: '/fav', page: () => FavouriteScreen(), binding: NoteBinding()),
 
     GetPage(
-        name: '/trashView', page: () => trashView(), binding: NoteBinding()),
+        name: '/trashView', page: () => TrashView(), binding: NoteBinding()),
 
     // GetPage(
     //     name: '/my_drawer',

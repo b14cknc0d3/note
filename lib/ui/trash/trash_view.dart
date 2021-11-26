@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:note/controller/note_controller.dart';
 import 'package:note/widget/note_row.dart';
 
-class trashView extends StatelessWidget {
-  trashView({Key? key}) : super(key: key);
+class TrashView extends StatelessWidget {
+  TrashView({Key? key}) : super(key: key);
   final NoteController controller = Get.find();
   @override
   Widget build(BuildContext context) {

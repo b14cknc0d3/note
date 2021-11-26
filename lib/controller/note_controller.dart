@@ -53,8 +53,8 @@ class NoteController extends GetxController {
   }
 
   getAllDeleteNote() async {
-    final trashNote = await _db.queryAllTrashRow();
-    trashNote.value = trashNote;
+    final tNote = await _db.queryAllTrashRow();
+    trashNote.value = tNote;
   }
 
   clear() {
@@ -110,6 +110,7 @@ class NoteController extends GetxController {
     await _db.moveToTrash(value, idx);
     getAllNote();
     getAllFavouriteNote();
+    getAllDeleteNote();
   }
 
   // deleteNoteRecBinById(int value, int index) async {

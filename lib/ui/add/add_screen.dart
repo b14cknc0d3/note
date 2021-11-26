@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:note/controller/note_controller.dart';
-import 'package:note/model/note.dart';
-import 'package:note/ui/my_drawer/my_drawer.dart';
-import 'package:search_page/search_page.dart';
+import 'package:markdown_io/markdown_io.dart';
 
 class AddScreen extends StatelessWidget {
   AddScreen({Key? key}) : super(key: key);
@@ -24,10 +22,31 @@ class AddScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Add note"),
       ),
-      body: Column(
+      body: ListView(
         children: [
           const SizedBox(
             height: 20,
+          ),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              MarkdownIo(
+                // onChanged: (String value) =>
+
+                // initialData: description,
+                label: 'Description',
+                maxLines: 10,
+                actions: MarkdownType.values,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: MarkdownBody(
+                  data: "Notes",
+                  shrinkWrap: true,
+                ),
+              ),
+            ],
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),

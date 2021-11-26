@@ -11,7 +11,8 @@ class NoteController extends GetxController {
   final TextEditingController titleTextController = TextEditingController();
   final TextEditingController noteTextController = TextEditingController();
   final _db = DatabaseHelper.instance;
-
+  RxList<Note> favouriteNote = <Note>[].obs;
+  RxList<Note> trashNote = <Note>[].obs;
   RxList<Note> searchNote = <Note>[].obs;
 
   @override
@@ -25,6 +26,8 @@ class NoteController extends GetxController {
   onInit() {
     super.onInit();
     getAllNote();
+    getAllFavouriteNote();
+    getAllDeleteNote();
   }
 
   addNote() {
@@ -42,6 +45,16 @@ class NoteController extends GetxController {
   getAllNote() async {
     final listNote = await _db.queryAllRows();
     notes.value = listNote;
+  }
+
+  getAllFavouriteNote() async {
+    final favNote = await _db.queryAllFavouriteRow();
+    favouriteNote.value = favNote;
+  }
+
+  getAllDeleteNote() async {
+    final trashNote = await _db.queryAllTrashRow();
+    trashNote.value = trashNote;
   }
 
   clear() {
@@ -75,6 +88,7 @@ class NoteController extends GetxController {
     getAllNote();
   }
 
+//use in recycle bin
   deleteNoteById(int index) async {
     try {
       final int row = await _db.delete(index);
@@ -85,4 +99,21 @@ class NoteController extends GetxController {
       throw Exception(e);
     }
   }
+
+  favoriteById(int value, int idx) async {
+    await _db.favoriteFunction(value, idx);
+    getAllNote();
+    getAllFavouriteNote();
+  }
+
+  moveToTrashById(int value, int idx) async {
+    await _db.moveToTrash(value, idx);
+    getAllNote();
+    getAllFavouriteNote();
+  }
+
+  // deleteNoteRecBinById(int value, int index) async {
+  //   await _db.inTrashFun(value, index);
+  //   getAllNote();
+  // }
 }

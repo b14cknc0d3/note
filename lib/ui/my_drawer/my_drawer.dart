@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:note/ui/recycle_bin/recycle_bin.dart';
 import 'package:share/share.dart';
 
 class MyHeaderDrawer extends StatefulWidget {
@@ -48,7 +49,10 @@ class _MyHeaderDrawerState extends State<MyHeaderDrawer> {
               leading: Icon(Icons.delete),
               title: Text("Recycle bin"),
               onTap: () {
-                Navigator.of(context).pop();
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) {
+                  return RecycleBin();
+                }));
               },
             ),
             Divider(),

@@ -125,6 +125,17 @@ class HomeScreen extends StatelessWidget {
             children: [
               IconButton(
                   onPressed: () {
+                    controller.favoriteById(
+                        favoriteInvert(
+                            controller.notes[idx].favourite!.toInt()),
+                        idx + 1);
+                    print(controller.notes[idx].favourite);
+                  },
+                  icon: controller.notes[idx].favourite == 0
+                      ? Icon(Icons.favorite_border)
+                      : Icon(Icons.favorite)),
+              IconButton(
+                  onPressed: () {
                     Get.toNamed('/edit', arguments: idx + 1);
                   },
                   icon: const Icon(Icons.edit, color: Colors.indigo)),
@@ -140,7 +151,6 @@ class HomeScreen extends StatelessWidget {
                       confirm: ElevatedButton(
                         onPressed: () {
                           controller.deleteNoteById(controller.notes[idx].id!);
-
                           Get.back();
                         },
                         child: const Text("OK"),
@@ -153,11 +163,12 @@ class HomeScreen extends StatelessWidget {
                 },
                 icon: const Icon(Icons.delete_forever, color: Colors.red),
               ),
-              StarButton(
-                  isStarred: false,
-                  valueChanged: (_isStarred) {
-                    print('Is Starred : $_isStarred');
-                  })
+              // StarButton(
+              //     iconSize: 15,
+              //     isStarred: false,
+              //     valueChanged: (_isStarred) {
+              //       print('Is Starred : $_isStarred');
+              //     })
             ],
           ),
           tileColor: Colors.white,
@@ -199,5 +210,9 @@ class HomeScreen extends StatelessWidget {
       log(text);
       return text;
     }
+  }
+
+  int favoriteInvert(int value) {
+    return value == 0 ? 1 : 0;
   }
 }

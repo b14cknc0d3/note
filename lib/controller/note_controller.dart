@@ -75,6 +75,7 @@ class NoteController extends GetxController {
     getAllNote();
   }
 
+//use in recycle bin
   deleteNoteById(int index) async {
     try {
       final int row = await _db.delete(index);
@@ -85,4 +86,14 @@ class NoteController extends GetxController {
       throw Exception(e);
     }
   }
+
+  favoriteById(int value, int idx) async {
+    await _db.favoriteFunction(value, idx);
+    getAllNote();
+  }
+
+  // deleteNoteRecBinById(int value, int index) async {
+  //   await _db.inTrashFun(value, index);
+  //   getAllNote();
+  // }
 }

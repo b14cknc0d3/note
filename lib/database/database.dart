@@ -50,8 +50,7 @@ class DatabaseHelper {
 
   // SQL code to create the database table
   Future _onCreate(Database db, int version) async {
-    await db.execute(
-        '''
+    await db.execute('''
           CREATE TABLE $table(
 	  $columnId INTEGER PRIMARY KEY
   , $columnTitle  TEXT
@@ -81,18 +80,33 @@ class DatabaseHelper {
   // a key-value list of columns.
   Future<List<Note>> queryAllRows() async {
     Database db = await instance.database;
-    final data = await db.query(table);
-    log(data.toString());
+    final data =
+        await db.query(table, where: '$columnIsInTrash=?', whereArgs: [0]);
     final List<Note> noteList =
         data.map<Note>((e) => Note.fromJson(e)).toList();
     log(noteList.toString());
     return noteList;
   }
 
-  // Future<List<Map<String, dynamic>>> queryAllRowOrderByTabId() async {
-  //   Database db = await instance.database;
-  //   return await db.rawQuery('SELECT  * FROM ApiMan ORDER  BY "tabId" ASC ');
-  // }
+  queryAllTrashRow() async {
+    Database db = await instance.database;
+    final data =
+        await db.query(table, where: '$columnIsInTrash=?', whereArgs: [1]);
+    final List<Note> noteList =
+        data.map<Note>((e) => Note.fromJson(e)).toList();
+    log(noteList.toString());
+    return noteList;
+  }
+
+  queryAllFavouriteRow() async {
+    Database db = await instance.database;
+    final data =
+        await db.query(table, where: '$columnFavourite=?', whereArgs: [1]);
+    log(data.toString());
+    final List<Note> noteList =
+        data.map<Note>((e) => Note.fromJson(e)).toList();
+    return noteList;
+  }
 
 //TODO :ADD WORKSPACE support [AND workspace = "$input"]
   // Future<List<Map<String, dynamic>>> queryAllApiRowOrderByTabId() async {
@@ -154,9 +168,19 @@ class DatabaseHelper {
         [value, idx]);
   }
 
+  moveToTrash(int value, int idx) async {
+    Database db = await instance.database;
+    await db.rawUpdate(
+        'UPDATE $table SET  $columnIsInTrash = ? where $columnId = ?',
+        [value, idx]);
+  }
+
   // Future<void> inTrashFun(int value, int idx) async {
   //   Database db = await instance.database;
   //   await db.rawDelete(
   //       'DELETE FROM $table where $columnIsInTrash = ? ', [value, idx]);
   // }
+  //:TODO to collect favourite;
+  //:TODO to add filter columnisInTrash Value in queryAllRow ,not include in Trash
+
 }

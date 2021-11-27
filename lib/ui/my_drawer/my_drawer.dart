@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:note/ui/recycle_bin/recycle_bin.dart';
+import 'package:get/get.dart';
+import 'package:note/ui/trash/trash_view.dart';
 import 'package:share/share.dart';
 
 class MyHeaderDrawer extends StatefulWidget {
@@ -39,20 +40,17 @@ class _MyHeaderDrawerState extends State<MyHeaderDrawer> {
               },
             ),
             ListTile(
-              leading: Icon(Icons.turned_in),
-              title: Text("Frequently used"),
+              leading: Icon(Icons.favorite),
+              title: Text("My Favourite"),
               onTap: () {
-                Navigator.of(context).pop();
+                Get.toNamed('/fav');
               },
             ),
             ListTile(
               leading: Icon(Icons.delete),
               title: Text("Recycle bin"),
               onTap: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) {
-                  return RecycleBin();
-                }));
+                Get.toNamed('/trashView');
               },
             ),
             Divider(),

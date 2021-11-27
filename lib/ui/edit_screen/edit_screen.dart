@@ -2,55 +2,38 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:note/controller/note_controller.dart';
 
-class AddScreen extends StatelessWidget {
-  AddScreen({Key? key}) : super(key: key);
+class EditScreen extends StatelessWidget {
+  EditScreen({Key? key}) : super(key: key);
   final NoteController controller = Get.find();
+  int noteId = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
+    controller.selectRowById(noteId);
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.save),
         onPressed: () {
-          controller.addNote();
+          controller.updateNoteById(noteId);
           controller.clear();
-          // same Get.back();  = Navigator.of(context).pop();
+          //  same Get.back();  = Navigator.of(context).pop();
           Get.back();
         },
       ),
       appBar: AppBar(
-        title: const Text("Add note"),
+        title: const Text("Edit note"),
       ),
-      body: ListView(
+      body: Column(
         children: [
           const SizedBox(
             height: 20,
-          ),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              MarkdownIo(
-                // onChanged: (String value) =>
-
-                // initialData: description,
-                label: 'Description',
-                maxLines: 10,
-                actions: MarkdownType.values,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 10),
-                child: MarkdownBody(
-                  data: "Notes",
-                  shrinkWrap: true,
-                ),
-              ),
-            ],
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
               controller: controller.titleTextController,
+              //initialValue: controller.selectRowById(),
+
               decoration: const InputDecoration(
                 hintText: "Title",
                 contentPadding: EdgeInsets.only(left: 8.0),
@@ -67,15 +50,15 @@ class AddScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: Colors.white54,
                     border: Border.all(color: Colors.red),
-                    borderRadius: BorderRadius.circular(8)),
+                    borderRadius: BorderRadius.circular(4)),
                 height: 50,
                 child: TextFormField(
                   controller: controller.noteTextController,
+                  keyboardType: TextInputType.multiline,
                   decoration: const InputDecoration(
-                    contentPadding: EdgeInsets.only(left: 8.0),
-                    border: InputBorder.none,
-                    hintText: "Write Your Note",
-                  ),
+                      contentPadding: EdgeInsets.only(left: 8.0),
+                      border: InputBorder.none,
+                      hintText: "Write Your Note"),
                 ),
               ),
             ),

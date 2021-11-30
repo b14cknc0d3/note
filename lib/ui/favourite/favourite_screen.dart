@@ -18,16 +18,8 @@ class FavouriteScreen extends StatelessWidget {
           () => ListView.builder(
               itemCount: controller.favouriteNote.length,
               itemBuilder: (context, idx) {
-                return NoteRow(
-                  noteList: controller.favouriteNote,
-                  idx: idx,
-                  deleteForever: false,
-                );
+                return NoteRow(noteList: controller.favouriteNote, idx: idx);
               }),
         ));
-  }
-
-  int favoriteInvert(int value) {
-    return value == 0 ? 1 : 0;
   }
 }

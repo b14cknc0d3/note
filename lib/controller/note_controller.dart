@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:markdown_io/markdown_io.dart';
 import 'package:note/database/database.dart';
 import 'package:note/model/note.dart';
 
@@ -11,8 +10,6 @@ class NoteController extends GetxController {
   RxList<Note> notes = <Note>[].obs;
   final TextEditingController titleTextController = TextEditingController();
   final TextEditingController noteTextController = TextEditingController();
-  final MarkdownIoTextController markdownIoTextController =
-      MarkdownIoTextController();
   final _db = DatabaseHelper.instance;
   RxList<Note> favouriteNote = <Note>[].obs;
   RxList<Note> trashNote = <Note>[].obs;
@@ -23,7 +20,6 @@ class NoteController extends GetxController {
     titleTextController.dispose();
     noteTextController.dispose();
     super.onClose();
-    markdownIoTextController.dispose();
   }
 
   @override
@@ -97,7 +93,7 @@ class NoteController extends GetxController {
     try {
       final int row = await _db.delete(index);
       if (row > 0) {
-        getAllDeleteNote();
+        getAllNote();
       }
     } catch (e) {
       throw Exception(e);

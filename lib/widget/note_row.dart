@@ -4,9 +4,14 @@ import 'package:note/controller/note_controller.dart';
 import 'package:note/model/note.dart';
 
 class NoteRow extends StatelessWidget {
-  NoteRow({Key? key, required this.noteList, required this.idx})
+  NoteRow(
+      {Key? key,
+      required this.noteList,
+      required this.idx,
+      required this.deleteForever})
       : super(key: key);
   final List<Note> noteList;
+  final bool deleteForever;
   final int idx;
   final NoteController controller = Get.find();
   @override
@@ -47,10 +52,13 @@ class NoteRow extends StatelessWidget {
                       ),
                       confirm: ElevatedButton(
                         onPressed: () {
-                          // controller.deleteNoteById(controller.notes[idx].id!);
-                          controller.moveToTrashById(
-                              favoriteInvert(noteList[idx].favourite!.toInt()),
-                              idx + 1);
+                          deleteForever == true
+                              ? controller
+                                  .deleteNoteById(controller.trashNote[idx].id!)
+                              : controller.moveToTrashById(
+                                  favoriteInvert(
+                                      noteList[idx].favourite!.toInt()),
+                                  idx + 1);
 
                           Get.back();
                         },

@@ -16,7 +16,11 @@ class TrashView extends StatelessWidget {
           () => ListView.builder(
               itemCount: controller.trashNote.length,
               itemBuilder: (context, idx) {
-                return NoteRow(noteList: controller.trashNote, idx: idx);
+                return NoteRow(
+                  noteList: controller.trashNote,
+                  idx: idx,
+                  deleteForever: true,
+                );
               }),
         ));
   }

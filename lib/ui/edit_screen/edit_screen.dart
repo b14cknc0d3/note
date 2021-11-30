@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:note/controller/note_controller.dart';
 
+// ignore: must_be_immutable
 class EditScreen extends StatelessWidget {
   EditScreen({Key? key}) : super(key: key);
   final NoteController controller = Get.find();

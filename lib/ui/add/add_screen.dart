@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:note/controller/note_controller.dart';
+import 'package:markdown_io/markdown_io.dart';
 
 class AddScreen extends StatelessWidget {
   AddScreen({Key? key}) : super(key: key);
@@ -38,8 +39,8 @@ class AddScreen extends StatelessWidget {
                 maxLines: 10,
                 actions: MarkdownType.values,
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 10),
+              const Padding(
+                padding: EdgeInsets.only(top: 10),
                 child: MarkdownBody(
                   data: "Notes",
                   shrinkWrap: true,

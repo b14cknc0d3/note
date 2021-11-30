@@ -205,6 +205,8 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.7.0"
+<<<<<<< HEAD
+=======
   mime:
     dependency: transitive
     description:
@@ -212,6 +214,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.1"
+>>>>>>> 6fcb1ec9333ec16a2f8a36b1e5e988ea5c9c6de2
   path:
     dependency: transitive
     description:
@@ -232,7 +235,7 @@ packages:
       name: path_provider_android
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.9"
+    version: "2.0.7"
   path_provider_ios:
     dependency: transitive
     description:
@@ -253,7 +256,7 @@ packages:
       name: path_provider_macos
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.3"
+    version: "2.0.2"
   path_provider_platform_interface:
     dependency: transitive
     description:
@@ -419,7 +422,7 @@ packages:
       name: win32
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.3.1"
+    version: "2.3.0"
   xdg_directories:
     dependency: transitive
     description:

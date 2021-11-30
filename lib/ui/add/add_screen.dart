@@ -3,8 +3,11 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:note/controller/note_controller.dart';
+<<<<<<< HEAD
 import 'package:markdown_io/markdown_io.dart';
 import 'package:markdown_widget/markdown_widget.dart';
+=======
+>>>>>>> parent of b0ee41b... my latest
 
 class AddScreen extends StatefulWidget {
   AddScreen({Key? key}) : super(key: key);
@@ -49,8 +52,8 @@ class _AddScreenState extends State<AddScreen> {
                 maxLines: 10,
                 actions: MarkdownType.values,
               ),
-              const Padding(
-                padding: EdgeInsets.only(top: 10),
+              Padding(
+                padding: const EdgeInsets.only(top: 10),
                 child: MarkdownBody(
                   data: "Notes",
                   shrinkWrap: true,

@@ -47,11 +47,7 @@ class HomeScreen extends StatelessWidget {
       body: Obx(() => ListView.builder(
           itemCount: controller.notes.length,
           itemBuilder: (ctx, idx) {
-            return NoteRow(
-              noteList: controller.notes,
-              idx: idx,
-              deleteForever: false,
-            );
+            return NoteRow(noteList: controller.notes, idx: idx);
           })),
     );
   }

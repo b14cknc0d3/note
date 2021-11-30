@@ -51,7 +51,7 @@ class DatabaseHelper {
   // SQL code to create the database table
   Future _onCreate(Database db, int version) async {
     await db.execute('''
-          CREATE TABLE $table(
+          CREATE TABLE $table( 
 	  $columnId INTEGER PRIMARY KEY
   , $columnTitle  TEXT
   ,$columnNote TEXT      
@@ -84,7 +84,9 @@ class DatabaseHelper {
         await db.query(table, where: '$columnIsInTrash=?', whereArgs: [0]);
     final List<Note> noteList =
         data.map<Note>((e) => Note.fromJson(e)).toList();
-    log(noteList.toString());
+
+    log("queryAllRows  " + data.toString());
+
     return noteList;
   }
 
@@ -100,8 +102,8 @@ class DatabaseHelper {
 
   queryAllFavouriteRow() async {
     Database db = await instance.database;
-    final data =
-        await db.query(table, where: '$columnFavourite=?', whereArgs: [1]);
+    final data = await db.query(table,
+        where: '$columnFavourite=? AND $columnIsInTrash=?', whereArgs: [1, 0]);
     log(data.toString());
     final List<Note> noteList =
         data.map<Note>((e) => Note.fromJson(e)).toList();
@@ -170,6 +172,8 @@ class DatabaseHelper {
 
   moveToTrash(int value, int idx) async {
     Database db = await instance.database;
+    log("moveToTrash   " + value.toString() + "   " + idx.toString());
+
     await db.rawUpdate(
         'UPDATE $table SET  $columnIsInTrash = ? where $columnId = ?',
         [value, idx]);

@@ -94,7 +94,7 @@ class DatabaseHelper {
         await db.query(table, where: '$columnIsInTrash=?', whereArgs: [1]);
     final List<Note> noteList =
         data.map<Note>((e) => Note.fromJson(e)).toList();
-    log(noteList.toString());
+    log("queryAllTrashRow " + noteList.toString());
     return noteList;
   }
 

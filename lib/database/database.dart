@@ -57,7 +57,7 @@ class DatabaseHelper {
   ,$columnNote TEXT      
   ,$columnDate  VARCHAR(20)
   , $columnUpdatedAt VARCHAR(20)
-  ,$columnFolderName VARCHAR(100) NOT NULL DEFAULT "default"
+  ,$columnFolderName VARCHAR(100) NOT NULL DEFAULT 0
   ,$columnIsInTrash INT NOT NULL DEFAULT 0
   ,$columnFavourite INT NOT NULL DEFAULT 0
 
@@ -94,7 +94,7 @@ class DatabaseHelper {
         await db.query(table, where: '$columnIsInTrash=?', whereArgs: [1]);
     final List<Note> noteList =
         data.map<Note>((e) => Note.fromJson(e)).toList();
-    log(noteList.toString());
+    log("queryAllTrashRow " + noteList.toString());
     return noteList;
   }
 

@@ -44,6 +44,7 @@ class NoteController extends GetxController {
 
   getAllNote() async {
     final listNote = await _db.queryAllRows();
+    log("queryallrow " + listNote.toString());
     notes.value = listNote;
   }
 
@@ -90,11 +91,13 @@ class NoteController extends GetxController {
 
 //use in recycle bin
   deleteNoteById(int index) async {
+    log("deleteNoteById " + index.toString());
     try {
-      final int row = await _db.delete(index);
-      if (row > 0) {
-        getAllNote();
-      }
+      await _db.delete(index);
+
+      getAllNote();
+      getAllDeleteNote();
+      getAllFavouriteNote();
     } catch (e) {
       throw Exception(e);
     }
@@ -107,10 +110,11 @@ class NoteController extends GetxController {
   }
 
   moveToTrashById(int value, int idx) async {
+    log("moveToTrashById " + value.toString() + " " + idx.toString());
     await _db.moveToTrash(value, idx);
+
     getAllNote();
     getAllFavouriteNote();
-    getAllDeleteNote();
   }
 
   // deleteNoteRecBinById(int value, int index) async {

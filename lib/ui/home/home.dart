@@ -4,11 +4,15 @@ import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:note/controller/note_controller.dart';
+import 'package:note/model/menu_item/menu_item_model.dart';
+import 'package:note/model/menu_item/menu_items.dart';
 import 'package:note/model/note.dart';
+import 'package:note/ui/about_us/about_us.dart';
 import 'package:note/ui/my_drawer/my_drawer.dart';
 import 'package:note/ui/note_view/note_view.dart';
 import 'package:note/widget/note_row.dart';
 import 'package:search_page/search_page.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 // class Note {
 //   final String title, body;
@@ -28,6 +32,7 @@ class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
 
   final NoteController controller = Get.put(NoteController());
+  final String url = 'https://github.com/b14cknc0d3/note';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -208,13 +213,38 @@ class HomeScreen extends StatelessWidget {
                     ));
               }),
         ),
-        IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.more_vert,
-              color: Colors.black,
-            )),
+        PopupMenuButton<MenuItem>(
+          itemBuilder: (context) => [
+            ...MenuItems.itemList.map(buildItem).toList(),
+          ],
+          onSelected: (item) => onSelected(context, item),
+        ),
       ],
     );
+  }
+
+  PopupMenuItem<MenuItem> buildItem(MenuItem item) => PopupMenuItem<MenuItem>(
+      value: item,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Icon(item.icon),
+          Text(
+            item.text,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+        ],
+      ));
+
+  onSelected(BuildContext context, MenuItem item) {
+    switch (item) {
+      case MenuItems.itemAboutUs:
+        Get.toNamed('/aboutUs');
+        break;
+
+      case MenuItems.itemGithubLink:
+        launch('');
+        break;
+    }
   }
 }

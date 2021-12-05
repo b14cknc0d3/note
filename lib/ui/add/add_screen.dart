@@ -22,32 +22,32 @@ class AddScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Add note"),
       ),
-      body: ListView(
+      body: Column(
         children: [
           const SizedBox(
             height: 20,
           ),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              MarkdownIo(
-                // onChanged: (String value) =>
+          // Column(
+          //   mainAxisSize: MainAxisSize.min,
+          //   crossAxisAlignment: CrossAxisAlignment.stretch,
+          //   children: <Widget>[
+          //     // MarkdownIo(
+          //     //   // onChanged: (String value) =>
 
-                // initialData: description,
-                label: 'Description',
-                maxLines: 10,
-                actions: MarkdownType.values,
-              ),
-              const Padding(
-                padding: EdgeInsets.only(top: 10),
-                child: MarkdownBody(
-                  data: "Notes",
-                  shrinkWrap: true,
-                ),
-              ),
-            ],
-          ),
+          //     //   // initialData: description,
+          //     //   label: 'Description',
+          //     //   maxLines: 10,
+          //     //   actions: MarkdownType.values,
+          //     // ),
+          //     // const Padding(
+          //     //   padding: EdgeInsets.only(top: 10),
+          //     //   child: MarkdownBody(
+          //     //     data: "Notes",
+          //     //     shrinkWrap: true,
+          //     //   ),
+          //     // ),
+          //   ],
+          // ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
@@ -69,8 +69,8 @@ class AddScreen extends StatelessWidget {
                     color: Colors.white54,
                     border: Border.all(color: Colors.red),
                     borderRadius: BorderRadius.circular(8)),
-                height: 50,
                 child: TextFormField(
+                  maxLines: null,
                   controller: controller.noteTextController,
                   decoration: const InputDecoration(
                     contentPadding: EdgeInsets.only(left: 8.0),

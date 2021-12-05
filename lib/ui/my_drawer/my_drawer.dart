@@ -55,8 +55,8 @@ class _MyHeaderDrawerState extends State<MyHeaderDrawer> {
             ),
             Divider(),
             ListTile(
-              leading: Icon(Icons.folder),
-              title: Text("Folder"),
+              leading: Icon(Icons.delete),
+              title: Text("clear all note"),
               onTap: () {
                 Navigator.of(context).pop();
               },

@@ -1,6 +1,7 @@
 //import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:note/controller/binding.dart';
+import 'package:note/ui/about_us/about_us.dart';
 import 'package:note/ui/add/add_screen.dart';
 import 'package:note/ui/edit_screen/edit_screen.dart';
 import 'package:note/ui/favourite/favourite_screen.dart';
@@ -22,6 +23,7 @@ class MyRoutes {
 
     GetPage(
         name: '/trashView', page: () => TrashView(), binding: NoteBinding()),
+    GetPage(name: '/aboutUs', page: () => AboutUs(), binding: NoteBinding()),
 
     // GetPage(
     //     name: '/my_drawer',

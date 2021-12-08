@@ -58,6 +58,20 @@ class NoteController extends GetxController {
     trashNote.value = tNote;
   }
 
+  deleteAllNote() async {
+    try {
+      await _db.deleleAll();
+      getAllNote();
+      getAllFavouriteNote();
+      getAllDeleteNote();
+      Get.snackbar("Success", "All Note Deleted",
+          colorText: Colors.white, backgroundColor: Colors.green);
+    } catch (e) {
+      Get.snackbar("Error", "Can't Delete All Note");
+      throw Exception(e);
+    }
+  }
+
   clear() {
     titleTextController.clear();
     noteTextController.clear();

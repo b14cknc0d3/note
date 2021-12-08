@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:note/controller/note_controller.dart';
 import 'package:note/ui/trash/trash_view.dart';
 import 'package:share/share.dart';
 
-class MyHeaderDrawer extends StatefulWidget {
-  const MyHeaderDrawer({Key? key}) : super(key: key);
+class MyHeaderDrawer extends StatelessWidget {
+  MyHeaderDrawer({Key? key}) : super(key: key);
+  NoteController controller = Get.find();
 
-  @override
-  _MyHeaderDrawerState createState() => _MyHeaderDrawerState();
-}
-
-class _MyHeaderDrawerState extends State<MyHeaderDrawer> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -58,7 +55,20 @@ class _MyHeaderDrawerState extends State<MyHeaderDrawer> {
               leading: Icon(Icons.delete),
               title: Text("clear all note"),
               onTap: () {
-                Navigator.of(context).pop();
+                Get.dialog(AlertDialog(
+                  title: Text("Are You Sure?"),
+                  content: Text("Delete All Note"),
+                  actions: [
+                    TextButton(
+                        child: Text("Cancel"), onPressed: () => Get.back()),
+                    TextButton(
+                        child: Text("OK"),
+                        onPressed: () {
+                          controller.deleteAllNote();
+                          Get.back();
+                        }),
+                  ],
+                ));
               },
             ),
           ],

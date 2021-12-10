@@ -1,11 +1,15 @@
+// Dart imports:
 import 'dart:developer';
 import 'dart:io';
-//import 'dart:math';
-import 'package:flutter/widgets.dart';
+
+// Project imports:
 import 'package:note/model/note.dart';
+// Package imports:
 import 'package:path/path.dart' as p;
-import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:sqflite/sqflite.dart';
+
+//import 'dart:math';
 
 class DatabaseHelper {
   static const _databaseName = "note.db";

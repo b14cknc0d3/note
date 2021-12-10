@@ -1,9 +1,17 @@
+// Dart imports:
 import 'dart:developer';
-//import 'dart:js';
-import 'package:favorite_button/favorite_button.dart';
+
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:favorite_button/favorite_button.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:search_page/search_page.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+// Project imports:
 import 'package:note/controller/note_controller.dart';
 import 'package:note/model/menu_item/menu_item_model.dart';
 import 'package:note/model/menu_item/menu_items.dart';
@@ -13,8 +21,8 @@ import 'package:note/ui/my_drawer/my_drawer.dart';
 import 'package:note/ui/note_view/note_view.dart';
 import 'package:note/utils/utils.dart';
 import 'package:note/widget/note_row.dart';
-import 'package:search_page/search_page.dart';
-import 'package:url_launcher/url_launcher.dart';
+
+//import 'dart:js';
 
 // class Note {
 //   final String title, body;

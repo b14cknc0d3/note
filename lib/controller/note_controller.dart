@@ -1,10 +1,19 @@
+// Dart imports:
 import 'dart:developer';
 
+// Flutter imports:
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+
+// Project imports:
 import 'package:note/database/database.dart';
 import 'package:note/model/note.dart';
+
+GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
 class NoteController extends GetxController {
   RxList<Note> notes = <Note>[].obs;
@@ -31,15 +40,22 @@ class NoteController extends GetxController {
   }
 
   addNote() {
-    DateTime now = DateTime.now();
-    Note note = Note(
-      title: titleTextController.text,
-      note: noteTextController.text,
-      createAt: "${now.year}-${now.month}-${now.day}",
-    );
-    log("called add note");
-    _db.insert(note.toJson());
-    getAllNote();
+    if (titleTextController.text.isNotEmpty &&
+        noteTextController.text.isNotEmpty) {
+      DateTime now = DateTime.now();
+      String datetime = DateFormat("dd.MM.yyyy hh:mm a").format(now);
+      Note note = Note(
+        title: titleTextController.text,
+        note: noteTextController.text,
+        createAt: "$datetime",
+      );
+      log("called add note");
+      _db.insert(note.toJson());
+      getAllNote();
+      Get.back();
+    } else {
+      log("Empty");
+    }
   }
 
   getAllNote() async {

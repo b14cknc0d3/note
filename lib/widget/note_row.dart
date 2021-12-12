@@ -1,16 +1,21 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:get/get.dart';
+
+// Project imports:
 import 'package:note/controller/note_controller.dart';
 import 'package:note/model/note.dart';
 
 class NoteRow extends StatelessWidget {
-  NoteRow(
-      {Key? key,
-      required this.noteList,
-      required this.noteId,
-      required this.deleteForever,
-      required this.idx})
-      : super(key: key);
+  NoteRow({
+    Key? key,
+    required this.noteList,
+    required this.noteId,
+    required this.deleteForever,
+    required this.idx,
+  }) : super(key: key);
   final bool deleteForever;
   final List<Note> noteList;
   final int noteId;

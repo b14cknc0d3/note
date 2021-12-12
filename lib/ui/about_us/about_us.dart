@@ -1,6 +1,7 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+// Project imports:
 import 'package:note/utils/utils.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class AboutUs extends StatelessWidget {
   const AboutUs({Key? key}) : super(key: key);

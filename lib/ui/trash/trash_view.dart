@@ -1,9 +1,12 @@
+// Dart imports:
 import 'dart:developer';
 
+// Flutter imports:
 import 'package:flutter/material.dart';
+// Package imports:
 import 'package:get/get.dart';
+// Project imports:
 import 'package:note/controller/note_controller.dart';
-import 'package:note/widget/note_row.dart';
 
 class TrashView extends StatelessWidget {
   TrashView({Key? key}) : super(key: key);

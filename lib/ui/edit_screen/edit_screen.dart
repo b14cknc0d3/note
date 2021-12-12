@@ -1,5 +1,10 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:get/get.dart';
+
+// Project imports:
 import 'package:note/controller/note_controller.dart';
 
 class EditScreen extends StatelessWidget {

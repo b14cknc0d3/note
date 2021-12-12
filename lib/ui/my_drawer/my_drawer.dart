@@ -1,7 +1,9 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+// Package imports:
 import 'package:get/get.dart';
+// Project imports:
 import 'package:note/controller/note_controller.dart';
-import 'package:note/ui/trash/trash_view.dart';
 import 'package:share/share.dart';
 
 class MyHeaderDrawer extends StatelessWidget {

@@ -1,7 +1,12 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:get/get.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/utils.dart';
+
+// Project imports:
 import 'package:note/controller/note_controller.dart';
 import 'package:note/widget/note_row.dart';
 

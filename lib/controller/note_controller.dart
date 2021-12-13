@@ -1,10 +1,19 @@
+// Dart imports:
 import 'dart:developer';
 
+// Flutter imports:
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+
+// Project imports:
 import 'package:note/database/database.dart';
 import 'package:note/model/note.dart';
+
+GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
 class NoteController extends GetxController {
   RxList<Note> notes = <Note>[].obs;
@@ -31,19 +40,27 @@ class NoteController extends GetxController {
   }
 
   addNote() {
-    DateTime now = DateTime.now();
-    Note note = Note(
-      title: titleTextController.text,
-      note: noteTextController.text,
-      createAt: "${now.year}-${now.month}-${now.day}",
-    );
-    log("called add note");
-    _db.insert(note.toJson());
-    getAllNote();
+    if (titleTextController.text.isNotEmpty &&
+        noteTextController.text.isNotEmpty) {
+      DateTime now = DateTime.now();
+      String datetime = DateFormat("dd.MM.yyyy hh:mm a").format(now);
+      Note note = Note(
+        title: titleTextController.text,
+        note: noteTextController.text,
+        createAt: "$datetime",
+      );
+      log("called add note");
+      _db.insert(note.toJson());
+      getAllNote();
+      Get.back();
+    } else {
+      log("Empty");
+    }
   }
 
   getAllNote() async {
     final listNote = await _db.queryAllRows();
+    log("queryallrow " + listNote.toString());
     notes.value = listNote;
   }
 
@@ -55,6 +72,20 @@ class NoteController extends GetxController {
   getAllDeleteNote() async {
     final tNote = await _db.queryAllTrashRow();
     trashNote.value = tNote;
+  }
+
+  deleteAllNote() async {
+    try {
+      await _db.deleleAll();
+      getAllNote();
+      getAllFavouriteNote();
+      getAllDeleteNote();
+      Get.snackbar("Success", "All Note Deleted",
+          colorText: Colors.white, backgroundColor: Colors.green);
+    } catch (e) {
+      Get.snackbar("Error", "Can't Delete All Note");
+      throw Exception(e);
+    }
   }
 
   clear() {
@@ -90,11 +121,13 @@ class NoteController extends GetxController {
 
 //use in recycle bin
   deleteNoteById(int index) async {
+    log("deleteNoteById " + index.toString());
     try {
-      final int row = await _db.delete(index);
-      if (row > 0) {
-        getAllNote();
-      }
+      await _db.delete(index);
+
+      getAllNote();
+      getAllDeleteNote();
+      getAllFavouriteNote();
     } catch (e) {
       throw Exception(e);
     }
@@ -107,10 +140,11 @@ class NoteController extends GetxController {
   }
 
   moveToTrashById(int value, int idx) async {
+    log("moveToTrashById " + value.toString() + " " + idx.toString());
     await _db.moveToTrash(value, idx);
+
     getAllNote();
     getAllFavouriteNote();
-    getAllDeleteNote();
   }
 
   // deleteNoteRecBinById(int value, int index) async {

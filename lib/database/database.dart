@@ -1,11 +1,15 @@
+// Dart imports:
 import 'dart:developer';
 import 'dart:io';
-//import 'dart:math';
-import 'package:flutter/widgets.dart';
+
+// Project imports:
 import 'package:note/model/note.dart';
+// Package imports:
 import 'package:path/path.dart' as p;
-import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:sqflite/sqflite.dart';
+
+//import 'dart:math';
 
 class DatabaseHelper {
   static const _databaseName = "note.db";
@@ -57,7 +61,7 @@ class DatabaseHelper {
   ,$columnNote TEXT      
   ,$columnDate  VARCHAR(20)
   , $columnUpdatedAt VARCHAR(20)
-  ,$columnFolderName VARCHAR(100) NOT NULL DEFAULT "default"
+  ,$columnFolderName VARCHAR(100) NOT NULL DEFAULT 0
   ,$columnIsInTrash INT NOT NULL DEFAULT 0
   ,$columnFavourite INT NOT NULL DEFAULT 0
 
@@ -94,7 +98,7 @@ class DatabaseHelper {
         await db.query(table, where: '$columnIsInTrash=?', whereArgs: [1]);
     final List<Note> noteList =
         data.map<Note>((e) => Note.fromJson(e)).toList();
-    log(noteList.toString());
+    log("queryAllTrashRow " + noteList.toString());
     return noteList;
   }
 

@@ -1,11 +1,15 @@
+// Dart imports:
+
+// Flutter imports:
 import 'package:flutter/material.dart';
+// Package imports:
 import 'package:get/get.dart';
+// Project imports:
 import 'package:note/controller/note_controller.dart';
-import 'package:markdown_io/markdown_io.dart';
 
 class AddScreen extends StatelessWidget {
+  NoteController controller = Get.find();
   AddScreen({Key? key}) : super(key: key);
-  final NoteController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -13,76 +17,121 @@ class AddScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.save),
         onPressed: () {
+          formKey.currentState!.validate();
           controller.addNote();
           controller.clear();
+
           // same Get.back();  = Navigator.of(context).pop();
-          Get.back();
+          //Get.back();
         },
       ),
       appBar: AppBar(
         title: const Text("Add note"),
       ),
-      body: ListView(
-        children: [
-          const SizedBox(
-            height: 20,
-          ),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              MarkdownIo(
-                // onChanged: (String value) =>
+      body: Form(
+        key: formKey,
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 20,
+            ),
+            // Column(
+            //   mainAxisSize: MainAxisSize.min,
+            //   crossAxisAlignment: CrossAxisAlignment.stretch,
+            //   children: <Widget>[
 
-                // initialData: description,
-                label: 'Description',
-                maxLines: 10,
-                actions: MarkdownType.values,
-              ),
-              const Padding(
-                padding: EdgeInsets.only(top: 10),
-                child: MarkdownBody(
-                  data: "Notes",
-                  shrinkWrap: true,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                // keyboardType: TextInputType.name,
+                controller: controller.titleTextController,
+                decoration: const InputDecoration(
+                  hintText: "Title",
+                  contentPadding: EdgeInsets.only(left: 8.0),
+                  border: OutlineInputBorder(),
                 ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              controller: controller.titleTextController,
-              decoration: const InputDecoration(
-                hintText: "Title",
-                contentPadding: EdgeInsets.only(left: 8.0),
-                border: OutlineInputBorder(),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Required the title';
+                  }
+                },
               ),
             ),
-          ),
 
-          // Divider(),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.white54,
-                    border: Border.all(color: Colors.red),
-                    borderRadius: BorderRadius.circular(8)),
-                height: 50,
-                child: TextFormField(
-                  controller: controller.noteTextController,
-                  decoration: const InputDecoration(
-                    contentPadding: EdgeInsets.only(left: 8.0),
-                    border: InputBorder.none,
-                    hintText: "Write Your Note",
+            // Divider(),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white54,
+                      border: Border.all(color: Colors.red),
+                      borderRadius: BorderRadius.circular(8)),
+                  child: TextFormField(
+                    maxLines: null,
+                    controller: controller.noteTextController,
+                    decoration: const InputDecoration(
+                      contentPadding: EdgeInsets.only(left: 8.0),
+                      border: InputBorder.none,
+                      hintText: "Write Your Note",
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Required';
+                      }
+                    },
                   ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
+      // body: Column(
+      //   children: [
+      //     const SizedBox(
+      //       height: 20,
+      //     ),
+      //     // Column(
+      //     //   mainAxisSize: MainAxisSize.min,
+      //     //   crossAxisAlignment: CrossAxisAlignment.stretch,
+      //     //   children: <Widget>[
+
+      //     Padding(
+      //       padding: const EdgeInsets.all(8.0),
+      //       child: TextFormField(
+      //         controller: controller.titleTextController,
+      //         decoration: const InputDecoration(
+      //           hintText: "Title",
+      //           contentPadding: EdgeInsets.only(left: 8.0),
+      //           border: OutlineInputBorder(),
+      //         ),
+      //       ),
+      //     ),
+
+      //     // Divider(),
+      //     Expanded(
+      //       child: Padding(
+      //         padding: const EdgeInsets.all(8.0),
+      //         child: Container(
+      //           decoration: BoxDecoration(
+      //               color: Colors.white54,
+      //               border: Border.all(color: Colors.red),
+      //               borderRadius: BorderRadius.circular(8)),
+      //           child: TextFormField(
+      //             maxLines: null,
+      //             controller: controller.noteTextController,
+      //             decoration: const InputDecoration(
+      //               contentPadding: EdgeInsets.only(left: 8.0),
+      //               border: InputBorder.none,
+      //               hintText: "Write Your Note",
+      //             ),
+      //           ),
+      //         ),
+      //       ),
+      //     ),
+      //   ],
+      // ),
     );
   }
 }

@@ -1,14 +1,26 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:get/get.dart';
+
+// Project imports:
 import 'package:note/controller/note_controller.dart';
 import 'package:note/model/note.dart';
 
 class NoteRow extends StatelessWidget {
-  NoteRow({Key? key, required this.noteList, required this.idx})
-      : super(key: key);
+  NoteRow({
+    Key? key,
+    required this.noteList,
+    required this.noteId,
+    required this.deleteForever,
+    required this.idx,
+  }) : super(key: key);
+  final bool deleteForever;
   final List<Note> noteList;
-  final int idx;
+  final int noteId;
   final NoteController controller = Get.find();
+  final int idx;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -25,15 +37,15 @@ class NoteRow extends StatelessWidget {
               IconButton(
                   onPressed: () {
                     controller.favoriteById(
-                        favoriteInvert(noteList[idx].favourite!.toInt()),
-                        idx + 1);
+                        favoriteInvert(noteList[noteId].favourite!.toInt()),
+                        noteId);
                   },
-                  icon: noteList[idx].favourite == 0
+                  icon: noteList[noteId].favourite == 0
                       ? Icon(Icons.favorite_border)
                       : Icon(Icons.favorite)),
               IconButton(
                   onPressed: () {
-                    Get.toNamed('/edit', arguments: idx + 1);
+                    Get.toNamed('/edit', arguments: noteId);
                   },
                   icon: const Icon(Icons.edit, color: Colors.indigo)),
               IconButton(
@@ -42,15 +54,18 @@ class NoteRow extends StatelessWidget {
                       barrierDismissible: false,
                       title: "Are you sure want to delete?",
                       content: Text(
-                        noteList[idx].title.toString(),
+                        noteList[noteId].title.toString(),
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                       confirm: ElevatedButton(
                         onPressed: () {
-                          // controller.deleteNoteById(controller.notes[idx].id!);
-                          controller.moveToTrashById(
-                              favoriteInvert(noteList[idx].favourite!.toInt()),
-                              idx + 1);
+                          deleteForever == true
+                              ? controller
+                                  .deleteNoteById(controller.notes[noteId].id!)
+                              : controller.moveToTrashById(
+                                  favoriteInvert(
+                                      noteList[noteId].favourite!.toInt()),
+                                  controller.notes[noteId].id!);
 
                           Get.back();
                         },
@@ -79,7 +94,7 @@ class NoteRow extends StatelessWidget {
           isThreeLine: true,
           title: Text(
             trimString(
-              text: noteList[idx].title.toString(),
+              text: noteList[noteId].title.toString(),
             ),
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
@@ -87,11 +102,11 @@ class NoteRow extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(trimString(
-                text: noteList[idx].note.toString(),
+                text: noteList[noteId].note.toString(),
               )),
               Text(
                 trimString(
-                  text: noteList[idx].createAt.toString(),
+                  text: noteList[noteId].createAt.toString(),
                 ),
                 style: const TextStyle(fontSize: 12),
               ),

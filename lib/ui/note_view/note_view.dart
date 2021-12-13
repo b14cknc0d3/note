@@ -1,27 +1,42 @@
+// Dart imports:
+import 'dart:developer';
+
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:get/get.dart';
+
+// Project imports:
 import 'package:note/controller/note_controller.dart';
 
-class NoteView extends StatefulWidget {
-  const NoteView({Key? key}) : super(key: key);
+class NoteView extends StatelessWidget {
+  NoteView({Key? key}) : super(key: key);
 
-  @override
-  _NoteViewState createState() => _NoteViewState();
-}
-
-class _NoteViewState extends State<NoteView> {
   final NoteController controller = Get.find();
-  int noteViewId = Get.arguments;
+  int noteViewId = Get.arguments["idx"];
+  int page = Get.arguments["page"];
 
   @override
   Widget build(BuildContext context) {
+    var listNote = page == 1
+        ? controller.notes
+        : page == 2
+            ? controller.favouriteNote
+            : controller.trashNote;
+
+    log("noteView " +
+        "Note[0]id " +
+        listNote[0].id.toString() +
+        " NoteView[idx]" +
+        noteViewId.toString());
     return Scaffold(
         appBar: AppBar(
-          title: Text(controller.notes[noteViewId].title.toString()),
+          title: Text(listNote[noteViewId].title.toString()),
           actions: [
             IconButton(
                 onPressed: () {
-                  Get.toNamed('/edit', arguments: noteViewId + 1);
+                  Get.toNamed('/edit', arguments: noteViewId);
                 },
                 icon: Icon(Icons.edit))
           ],
@@ -34,7 +49,7 @@ class _NoteViewState extends State<NoteView> {
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Text(
-                    controller.notes[noteViewId].createAt.toString(),
+                    listNote[noteViewId].createAt.toString(),
                     style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
@@ -46,7 +61,7 @@ class _NoteViewState extends State<NoteView> {
             SizedBox(
               height: 30,
             ),
-            Center(child: Text(controller.notes[noteViewId].note.toString())),
+            Center(child: Text(listNote[noteViewId].note.toString())),
           ],
         ));
   }
